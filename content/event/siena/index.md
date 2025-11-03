@@ -27,7 +27,7 @@ date_end: '2025-11-05T12:30:00Z' # Approximate end of your panel
 all_day: false
 
 # Schedule page publish date (NOT talk date).
-publishDate: '2024-05-30T00:00:00Z' # Set to current date
+publishDate: '2025-02-11T00:00:00Z' # Set to current date
 
 authors:
   - admin # Assuming your author ID is michele-ciletti
