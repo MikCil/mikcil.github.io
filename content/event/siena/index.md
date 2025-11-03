@@ -23,7 +23,7 @@ all_day: false
 publishDate: '2024-05-30T00:00:00Z' # Set to current date
 
 authors:
-  - michele-ciletti # Assuming your author ID is michele-ciletti
+  - admin # Assuming your author ID is michele-ciletti
 
 tags:
   - AI
