@@ -10,4 +10,5 @@ publication_types:
 - article-journal
 publication: '*Proceedings of Historical Languages and AI. March 5--6, 2026, Humboldt
   University Berlin (Germany)*'
+featured: True
 ---

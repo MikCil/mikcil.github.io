@@ -12,4 +12,5 @@ publication_types:
 - paper-conference
 publication: '*Proceedings of the 10th Joint SIGHUM Workshop on Computational Linguistics
   for Cultural Heritage, Social Sciences, Humanities and Literature 2026*'
+featured: True
 ---

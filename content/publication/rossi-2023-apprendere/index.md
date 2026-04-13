@@ -11,5 +11,5 @@ publishDate: '2025-09-05T10:23:09.232577Z'
 publication_types:
 - article-journal
 publication: '*IUL Research*'
-featured: true
+featured: False
 ---
