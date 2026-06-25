@@ -1,3 +1,4 @@
+{{ if .IsHome }}
 <style>
   .home-unicorn-section {
     position: relative;
@@ -40,23 +41,11 @@
     z-index: 1;
   }
 
-  .home-unicorn-section > :not(.home-unicorn-bg) {
-    max-width: min(58vw, 1040px) !important;
-    margin-left: clamp(1.5rem, 6vw, 7rem) !important;
-    margin-right: auto !important;
-  }
-
   .home-unicorn-section > .container,
   .home-unicorn-section > div[class*="max-w-"],
   .home-unicorn-section > div > div[class*="max-w-"] {
     margin-left: clamp(1.5rem, 6vw, 7rem) !important;
     margin-right: auto !important;
-  }
-
-  .home-unicorn-section > * .container,
-  .home-unicorn-section > * .mx-auto {
-    margin-left: 0 !important;
-    margin-right: 0 !important;
   }
 
   .home-unicorn-section .text-center {
@@ -65,10 +54,6 @@
 
   .home-unicorn-section .justify-center {
     justify-content: flex-start !important;
-  }
-
-  .home-unicorn-section .justify-items-center {
-    justify-items: start !important;
   }
 
   .home-unicorn-section img.rounded-full,
@@ -107,12 +92,6 @@
       margin-left: 1.25rem !important;
       margin-right: 1.25rem !important;
     }
-
-    .home-unicorn-section > * .container,
-    .home-unicorn-section > * .mx-auto {
-      margin-left: 0 !important;
-      margin-right: 0 !important;
-    }
   }
 </style>
 
@@ -143,7 +122,7 @@
     }
 
     function mountHero() {
-      var hero = document.querySelector(".home-unicorn-section");
+      var hero = document.querySelector(".home-unicorn-section") || document.querySelector("main > section:first-of-type");
 
       if (!hero || hero.querySelector(".home-unicorn-bg")) {
         return;
@@ -172,3 +151,4 @@
     }
   })();
 </script>
+{{ end }}
