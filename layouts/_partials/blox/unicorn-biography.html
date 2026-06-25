@@ -1,0 +1,337 @@
+{{ $block := . }}
+{{ $content := $block.content }}
+{{ $design := $block.design }}
+{{ $username := $content.username | default "admin" }}
+{{ $author := site.GetPage (printf "/authors/%s" $username) }}
+{{ $avatar := "" }}
+{{ if $author }}
+  {{ $avatar = $author.Resources.GetMatch "avatar*" }}
+{{ end }}
+{{ $button := $content.button }}
+{{ $socialLabels := dict "at-symbol" "@" "brands/x" "X" "brands/bluesky" "Bluesky" "brands/mastodon" "Mastodon" "brands/github" "GitHub" "brands/linkedin" "LinkedIn" "academicons/google-scholar" "Scholar" "academicons/researchgate" "RG" }}
+
+<section class="unicorn-biography {{ $design.css_class }}" data-unicorn-biography>
+  <style>
+    .unicorn-biography {
+      position: relative;
+      isolation: isolate;
+      overflow: hidden;
+      min-height: calc(100vh - 4.5rem);
+      padding: clamp(4rem, 8vw, 7rem) 0 clamp(4rem, 7vw, 6rem);
+      background: #000;
+      color: #f8fafc;
+    }
+
+    .unicorn-biography::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+      pointer-events: none;
+      background:
+        linear-gradient(90deg, #000 0%, rgba(0, 0, 0, 0.97) 29%, rgba(0, 0, 0, 0.72) 55%, rgba(0, 0, 0, 0.12) 100%),
+        linear-gradient(180deg, rgba(0, 0, 0, 0.08) 0%, #000 100%);
+    }
+
+    .unicorn-biography__scene {
+      position: absolute;
+      inset: 0 0 0 auto;
+      z-index: 0;
+      width: min(62vw, 1120px);
+      height: 100%;
+      min-height: 620px;
+    }
+
+    .unicorn-biography__inner {
+      position: relative;
+      z-index: 2;
+      width: min(980px, calc(100% - 2rem));
+      margin-left: clamp(1rem, 5.8vw, 7rem);
+      margin-right: auto;
+      display: grid;
+      grid-template-columns: minmax(220px, 280px) minmax(0, 1fr);
+      gap: clamp(2rem, 4.5vw, 4.5rem);
+      align-items: center;
+      text-align: left;
+    }
+
+    .unicorn-biography__profile,
+    .unicorn-biography__about {
+      text-align: left;
+    }
+
+    .unicorn-biography__avatar {
+      width: clamp(150px, 16vw, 220px);
+      height: clamp(150px, 16vw, 220px);
+      object-fit: cover;
+      border-radius: 999px;
+      border: 4px solid rgba(148, 163, 184, 0.35);
+      box-shadow: 0 24px 70px rgba(0, 0, 0, 0.5);
+    }
+
+    .unicorn-biography__name {
+      margin: 1.5rem 0 0;
+      font-size: clamp(2rem, 4vw, 3.25rem);
+      line-height: 1;
+      letter-spacing: 0;
+      color: #fff;
+    }
+
+    .unicorn-biography__pronouns {
+      margin: 0.6rem 0 0;
+      color: #94a3b8;
+      font-size: 1.15rem;
+    }
+
+    .unicorn-biography__role,
+    .unicorn-biography__organization {
+      margin: 1.1rem 0 0;
+      color: #e2e8f0;
+      font-weight: 700;
+      line-height: 1.45;
+    }
+
+    .unicorn-biography__organization {
+      margin-top: 0.4rem;
+    }
+
+    .unicorn-biography__organization a,
+    .unicorn-biography__socials a,
+    .unicorn-biography__button {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .unicorn-biography__socials {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.55rem;
+      margin-top: 1.4rem;
+    }
+
+    .unicorn-biography__socials a {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 2.2rem;
+      height: 2.2rem;
+      padding: 0 0.65rem;
+      border: 1px solid rgba(226, 232, 240, 0.28);
+      background: rgba(15, 23, 42, 0.38);
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: #f8fafc;
+    }
+
+    .unicorn-biography__about {
+      max-width: 720px;
+    }
+
+    .unicorn-biography__about h2 {
+      margin: 0 0 1.3rem;
+      font-size: clamp(2rem, 3vw, 2.7rem);
+      line-height: 1.1;
+      letter-spacing: 0;
+      color: #fff;
+    }
+
+    .unicorn-biography__about p,
+    .unicorn-biography__meta li,
+    .unicorn-biography__education {
+      color: #cbd5e1;
+      font-size: clamp(1.05rem, 1.4vw, 1.28rem);
+      line-height: 1.75;
+    }
+
+    .unicorn-biography__button {
+      display: inline-flex;
+      align-items: center;
+      margin-top: 1.2rem;
+      padding: 0.75rem 1.15rem;
+      border: 1px solid rgba(148, 163, 184, 0.45);
+      background: rgba(15, 23, 42, 0.72);
+      color: #f8fafc;
+      font-weight: 700;
+    }
+
+    .unicorn-biography__meta {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: clamp(2rem, 5vw, 4rem);
+      margin-top: clamp(2rem, 4vw, 3.2rem);
+    }
+
+    .unicorn-biography__meta h3 {
+      margin: 0 0 1rem;
+      color: #e2e8f0;
+      font-size: clamp(1.45rem, 2vw, 1.85rem);
+      line-height: 1.15;
+    }
+
+    .unicorn-biography__meta ul {
+      margin: 0;
+      padding-left: 1.35rem;
+    }
+
+    .unicorn-biography__education {
+      display: grid;
+      gap: 0.9rem;
+    }
+
+    .unicorn-biography__education strong {
+      display: block;
+      color: #e2e8f0;
+      line-height: 1.35;
+    }
+
+    .unicorn-biography__education span {
+      display: block;
+      line-height: 1.35;
+    }
+
+    @media (max-width: 1120px) {
+      .unicorn-biography__scene {
+        width: 100%;
+        opacity: 0.44;
+      }
+
+      .unicorn-biography::after {
+        background: rgba(0, 0, 0, 0.76);
+      }
+
+      .unicorn-biography__inner {
+        max-width: 760px;
+        grid-template-columns: 1fr;
+        align-items: start;
+      }
+    }
+
+    @media (max-width: 720px) {
+      .unicorn-biography {
+        min-height: auto;
+        padding: 3.5rem 0;
+      }
+
+      .unicorn-biography__inner {
+        width: calc(100% - 2rem);
+        margin-left: 1rem;
+        margin-right: 1rem;
+      }
+
+      .unicorn-biography__meta {
+        grid-template-columns: 1fr;
+      }
+
+      .unicorn-biography__scene {
+        opacity: 0.28;
+      }
+    }
+  </style>
+
+  <div
+    class="unicorn-biography__scene"
+    data-us-project="XPSEx1lcpO1HLSIWpza8"
+    data-us-scale="0.85"
+    data-us-dpi="1.5"
+    data-us-fps="60"
+    data-us-lazyload="false"
+    data-us-production="true"
+    data-us-alttext="Interactive WebGL figure animation"
+    data-us-arialabel="Interactive WebGL figure animation"
+  ></div>
+
+  {{ with $author }}
+    <div class="unicorn-biography__inner">
+      <aside class="unicorn-biography__profile">
+        {{ with $avatar }}
+          {{ $image := .Fill "440x440 Center" }}
+          <img class="unicorn-biography__avatar" src="{{ $image.RelPermalink }}" alt="{{ $author.Title }}">
+        {{ end }}
+
+        <h1 class="unicorn-biography__name">{{ .Title }}</h1>
+        {{ with .Params.pronouns }}<p class="unicorn-biography__pronouns">({{ . }})</p>{{ end }}
+        {{ with .Params.role }}<p class="unicorn-biography__role">{{ . }}</p>{{ end }}
+
+        {{ range first 1 .Params.organizations }}
+          <p class="unicorn-biography__organization">
+            {{ if .url }}<a href="{{ .url | safeURL }}">{{ .name }}</a>{{ else }}{{ .name }}{{ end }}
+          </p>
+        {{ end }}
+
+        {{ with .Params.profiles }}
+          <nav class="unicorn-biography__socials" aria-label="Social profiles">
+            {{ range . }}
+              {{ $url := .url }}
+              {{ if and $url (not (or (hasPrefix $url "http") (hasPrefix $url "mailto:"))) }}
+                {{ $url = printf "https://%s" $url }}
+              {{ end }}
+              {{ $label := .label | default (index $socialLabels .icon) | default .icon }}
+              <a href="{{ $url | safeURL }}" aria-label="{{ $label }}" title="{{ $label }}">{{ index $socialLabels .icon | default $label }}</a>
+            {{ end }}
+          </nav>
+        {{ end }}
+      </aside>
+
+      <div class="unicorn-biography__about">
+        {{ .Content }}
+
+        {{ with $button }}
+          <a class="unicorn-biography__button" href="{{ .url | relURL }}">{{ .text }}</a>
+        {{ end }}
+
+        <div class="unicorn-biography__meta">
+          {{ with .Params.interests }}
+            <section>
+              <h3>Interests</h3>
+              <ul>
+                {{ range . }}<li>{{ . }}</li>{{ end }}
+              </ul>
+            </section>
+          {{ end }}
+
+          {{ with .Params.education }}
+            <section>
+              <h3>Education</h3>
+              <div class="unicorn-biography__education">
+                {{ range . }}
+                  <div>
+                    <strong>{{ .area }}</strong>
+                    <span>{{ .institution }}</span>
+                  </div>
+                {{ end }}
+              </div>
+            </section>
+          {{ end }}
+        </div>
+      </div>
+    </div>
+  {{ end }}
+
+  <script>
+    (function () {
+      var sdkUrl = "https://cdn.jsdelivr.net/gh/hiunicornstudio/unicornstudio.js@v2.2.5/dist/unicornStudio.umd.js";
+
+      function start() {
+        if (window.UnicornStudio && window.UnicornStudio.init) {
+          window.UnicornStudio.init();
+        }
+      }
+
+      if (window.UnicornStudio && window.UnicornStudio.init) {
+        start();
+        return;
+      }
+
+      if (document.querySelector("script[data-unicorn-studio-sdk]")) {
+        return;
+      }
+
+      var script = document.createElement("script");
+      script.src = sdkUrl;
+      script.async = true;
+      script.dataset.unicornStudioSdk = "true";
+      script.onload = start;
+      document.head.appendChild(script);
+    })();
+  </script>
+</section>
