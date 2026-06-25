@@ -1,0 +1,154 @@
+{{ if .IsHome }}
+<style>
+  .home-unicorn-section {
+    position: relative;
+    min-height: calc(100vh - 84px);
+    overflow: hidden;
+    background: #000 !important;
+    isolation: isolate;
+  }
+
+  .home-unicorn-bg {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    background: #000;
+  }
+
+  .home-unicorn-bg::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    pointer-events: none;
+    background:
+      linear-gradient(90deg, #000 0%, rgba(0, 0, 0, 0.94) 31%, rgba(0, 0, 0, 0.48) 58%, rgba(0, 0, 0, 0.08) 100%),
+      linear-gradient(180deg, rgba(0, 0, 0, 0.82) 0%, rgba(0, 0, 0, 0) 28%);
+  }
+
+  .home-unicorn-bg [data-us-project] {
+    position: absolute;
+    top: 50%;
+    right: 0;
+    width: min(74vw, 1420px);
+    height: 100%;
+    min-height: 680px;
+    transform: translateY(-50%);
+  }
+
+  .home-unicorn-section > *:not(.home-unicorn-bg) {
+    position: relative;
+    z-index: 1;
+  }
+
+  .home-unicorn-section > .container,
+  .home-unicorn-section > div[class*="max-w-"],
+  .home-unicorn-section > div > div[class*="max-w-"] {
+    margin-left: clamp(1.5rem, 6vw, 7rem) !important;
+    margin-right: auto !important;
+  }
+
+  .home-unicorn-section .text-center {
+    text-align: left !important;
+  }
+
+  .home-unicorn-section .justify-center {
+    justify-content: flex-start !important;
+  }
+
+  .home-unicorn-section img.rounded-full,
+  .home-unicorn-section img[class*="rounded"] {
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+  }
+
+  @media (min-width: 1024px) {
+    .home-unicorn-section > .container,
+    .home-unicorn-section > div[class*="max-w-"],
+    .home-unicorn-section > div > div[class*="max-w-"] {
+      max-width: min(58vw, 1040px) !important;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .home-unicorn-section {
+      min-height: auto;
+    }
+
+    .home-unicorn-bg {
+      opacity: 0.45;
+    }
+
+    .home-unicorn-bg [data-us-project] {
+      right: -36vw;
+      width: 130vw;
+      min-height: 100%;
+    }
+
+    .home-unicorn-section > .container,
+    .home-unicorn-section > div[class*="max-w-"],
+    .home-unicorn-section > div > div[class*="max-w-"] {
+      max-width: none !important;
+      margin-left: 1.25rem !important;
+      margin-right: 1.25rem !important;
+    }
+  }
+</style>
+
+<script>
+  (function () {
+    var projectId = "XPSEx1lcpO1HLSIWpza8";
+
+    function initUnicorn() {
+      if (window.UnicornStudio && window.UnicornStudio.init) {
+        window.UnicornStudio.init();
+        return;
+      }
+
+      if (document.querySelector('script[data-unicorn-studio-loader]')) {
+        return;
+      }
+
+      window.UnicornStudio = window.UnicornStudio || { isInitialized: false };
+
+      var script = document.createElement("script");
+      script.src = "https://cdn.jsdelivr.net/gh/hiunicornstudio/unicornstudio.js@v2.2.5/dist/unicornStudio.umd.js";
+      script.async = true;
+      script.dataset.unicornStudioLoader = "true";
+      script.onload = function () {
+        window.UnicornStudio.init();
+      };
+      (document.head || document.body).appendChild(script);
+    }
+
+    function mountHero() {
+      var hero = document.querySelector(".home-unicorn-section") || document.querySelector("main > section:first-of-type");
+
+      if (!hero || hero.querySelector(".home-unicorn-bg")) {
+        return;
+      }
+
+      hero.classList.add("home-unicorn-section");
+
+      var background = document.createElement("div");
+      background.className = "home-unicorn-bg";
+      background.setAttribute("aria-hidden", "true");
+
+      var unicorn = document.createElement("div");
+      unicorn.dataset.usProject = projectId;
+      unicorn.style.width = "100%";
+      unicorn.style.height = "100%";
+
+      background.appendChild(unicorn);
+      hero.insertBefore(background, hero.firstChild);
+      initUnicorn();
+    }
+
+    if (document.readyState === "loading") {
+      document.addEventListener("DOMContentLoaded", mountHero);
+    } else {
+      mountHero();
+    }
+  })();
+</script>
+{{ end }}
