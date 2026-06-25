@@ -9,6 +9,11 @@ design:
   spacing: "6rem"
 
 sections:
+  - block: home-unicorn-background
+    content:
+      project_id: XPSEx1lcpO1HLSIWpza8
+    design:
+      css_class: home-unicorn-stage
   - block: resume-biography-3
     content:
       # Choose a user profile to display (a folder name within `content/authors/`)
