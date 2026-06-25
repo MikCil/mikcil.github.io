@@ -1,0 +1,164 @@
+<style>
+  .hero-unicorn {
+    position: relative;
+    isolation: isolate;
+    overflow: hidden;
+    min-height: calc(100vh - 4.5rem);
+    background: #000 !important;
+  }
+
+  html.has-unicorn-hero,
+  html.has-unicorn-hero body,
+  html.has-unicorn-hero header,
+  html.has-unicorn-hero nav {
+    background: #000 !important;
+  }
+
+  .hero-unicorn::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    pointer-events: none;
+    background:
+      linear-gradient(90deg, #000 0%, rgba(0, 0, 0, 0.96) 30%, rgba(0, 0, 0, 0.68) 54%, rgba(0, 0, 0, 0.08) 100%),
+      linear-gradient(180deg, rgba(0, 0, 0, 0.08) 0%, #000 100%);
+  }
+
+  .hero-unicorn .unicorn-hero-scene {
+    position: absolute;
+    inset: 0 0 0 auto;
+    z-index: 0;
+    width: min(62vw, 1080px);
+    height: 100%;
+    min-height: 620px;
+    pointer-events: auto;
+  }
+
+  .hero-unicorn > :not(.unicorn-hero-scene) {
+    position: relative;
+    z-index: 2;
+  }
+
+  .hero-unicorn > div:not(.unicorn-hero-scene) {
+    width: min(920px, calc(100% - 2rem));
+    max-width: min(52vw, 920px);
+    margin-left: clamp(1rem, 5.8vw, 7rem) !important;
+    margin-right: auto !important;
+  }
+
+  .hero-unicorn [class*="text-center"] {
+    text-align: left !important;
+  }
+
+  .hero-unicorn [class*="justify-center"] {
+    justify-content: flex-start !important;
+  }
+
+  .hero-unicorn > div [class*="items-center"] {
+    align-items: flex-start;
+  }
+
+  .hero-unicorn [class*="mx-auto"] {
+    margin-left: 0 !important;
+    margin-right: auto !important;
+  }
+
+  .hero-unicorn img {
+    margin-left: 0 !important;
+    margin-right: auto !important;
+  }
+
+  .hero-unicorn :is(h1, h2, h3, p, li, a, span) {
+    text-shadow: 0 1px 18px rgba(0, 0, 0, 0.75);
+  }
+
+  @media (max-width: 1100px) {
+    .hero-unicorn > div:not(.unicorn-hero-scene) {
+      max-width: min(680px, calc(100% - 2rem));
+    }
+
+    .hero-unicorn .unicorn-hero-scene {
+      width: 100%;
+      opacity: 0.45;
+    }
+
+    .hero-unicorn::after {
+      background: rgba(0, 0, 0, 0.72);
+    }
+  }
+
+  @media (max-width: 760px) {
+    .hero-unicorn {
+      min-height: auto;
+    }
+
+    .hero-unicorn > div:not(.unicorn-hero-scene) {
+      width: calc(100% - 2rem);
+      max-width: calc(100% - 2rem);
+      margin-left: 1rem !important;
+      margin-right: 1rem !important;
+    }
+
+    .hero-unicorn .unicorn-hero-scene {
+      min-height: 100%;
+      opacity: 0.28;
+    }
+  }
+</style>
+
+<script>
+  (function () {
+    const projectId = "XPSEx1lcpO1HLSIWpza8";
+    const sdkUrl = "https://cdn.jsdelivr.net/gh/hiunicornstudio/unicornstudio.js@v2.2.5/dist/unicornStudio.umd.js";
+
+    function initUnicornHero() {
+      const hero = document.querySelector(".hero-unicorn");
+      if (!hero || hero.querySelector(".unicorn-hero-scene")) {
+        return;
+      }
+
+      document.documentElement.classList.add("has-unicorn-hero");
+
+      const scene = document.createElement("div");
+      scene.className = "unicorn-hero-scene";
+      scene.dataset.usProject = projectId;
+      scene.dataset.usScale = "0.85";
+      scene.dataset.usDpi = "1.5";
+      scene.dataset.usFps = "60";
+      scene.dataset.usLazyload = "false";
+      scene.dataset.usProduction = "true";
+      scene.dataset.usAlttext = "Interactive WebGL figure animation";
+      scene.dataset.usArialabel = "Interactive WebGL figure animation";
+      hero.prepend(scene);
+
+      function startScene() {
+        if (window.UnicornStudio && window.UnicornStudio.init) {
+          window.UnicornStudio.init();
+        }
+      }
+
+      if (window.UnicornStudio && window.UnicornStudio.init) {
+        startScene();
+        return;
+      }
+
+      if (document.querySelector("script[data-unicorn-studio-sdk]")) {
+        return;
+      }
+
+      const script = document.createElement("script");
+      script.src = sdkUrl;
+      script.async = true;
+      script.dataset.unicornStudioSdk = "true";
+      script.onload = startScene;
+      document.head.appendChild(script);
+    }
+
+    if (document.readyState === "loading") {
+      document.addEventListener("DOMContentLoaded", initUnicornHero);
+    } else {
+      initUnicornHero();
+    }
+  })();
+</script>
