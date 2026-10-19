@@ -89,12 +89,20 @@ education:
       Final mark: 110 / 110 cum laude
     
 work:
+  - position: PhD Student
+    company_name: Sapienza University of Rome
+    company_url: 'https://www.unifg.it/en'
+    company_logo: custom/unifg
+    date_start: 2026-11-01
+    date_end: ''
+    summary: |
+      Member of the [Sapienza NLP](https://nlp.uniroma1.it/) group. Research on Word Sense Disambiguation, Semantic Role Labeling and low-parameter language models for multilingual semantics.
   - position: Research Assistant (Borsista di ricerca)
     company_name: University of Foggia
     company_url: 'https://www.unifg.it/en'
     company_logo: custom/unifg
     date_start: 2022-04-12
-    date_end: ''
+    date_end: '2026-10-18'
     summary: |2-
       Responsibilities include:
       - Research in Digital Humanities, Computational Linguistics and Educational Technologies
