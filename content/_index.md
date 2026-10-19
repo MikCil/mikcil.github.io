@@ -31,7 +31,9 @@ sections:
       title: 'My Research'
       subtitle: ''
       text: |-
-        I am a Pre-doctoral Researcher and Master's Student at the University of Foggia, where I work on Digital Humanities. My main projects involve the use of computational methods to study Classical languages, but I am also interested in the application of NLP to any kind of historical or literary data. I am a Junior Social Media Editor at the Journal of Open Humanities Data. My interests include Network Analysis, RAG, Latin poetry, computational literary studies, historical newspapers, EdTech and much more. Collaborations are always welcome - feel free to reach out!
+        I am a PhD student in Engineering in Computer Science at Sapienza University of Rome, where I am part of the [Sapienza NLP](https://nlp.uniroma1.it/) group. My research is about semantics, mainly Word Sense Disambiguation and Semantic Role Labeling. I am building linguistically grounded, low-parameter language models for multilingual lexical and predicate-argument semantics; I also study how knowledge transfers between languages in these models, and evaluate them on tasks such as machine translation and diachronic semantic change.
+
+        I come to NLP from Classics. I studied Digital Humanities (BA) and Classical Philology (MA) at the University of Foggia, where I have also worked as a research assistant since 2022, and historical languages are still a large part of my work: recent projects include open-vocabulary sense retrieval for Latin and Ancient Greek, a corpus of prosodically accurate Latin poetry read by LLM-based text-to-speech, and the digitisation of a post-war newspaper. I am also a Junior Social Media Editor at the Journal of Open Humanities Data. Collaborations are always welcome - feel free to reach out!
     design:
       columns: '1'
   - block: collection

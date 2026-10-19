@@ -1,3 +1,31 @@
+@misc{ciletti2026inspicio,
+  title={Inspicio: Open-Vocabulary, LLM-Based Sense Retrieval for Historical Languages},
+  author={Ciletti, Michele},
+  journal={arXiv preprint arXiv:2609.00998},
+  year={2026},
+  date={2026-09-01},
+  eprint={2609.00998},
+  archivePrefix={arXiv},
+  primaryClass={cs.CL},
+  doi={10.48550/arXiv.2609.00998},
+  abstract={Word Sense Disambiguation has advanced rapidly for English and a handful of well-resourced modern languages, but it continues to assume the existence of a sense inventory and a word-to-sense mapping in the source language (Navigli, 2026). These assumptions break down for most historical and low-resource languages, whose dedicated WordNets are either incomplete or still under construction. We present Inspicio, an open-vocabulary retrieval pipeline that links tokens in context to synsets of the Open English WordNet (McCrae et al., 2020) without requiring any source-language inventory or mapping. For each occurrence, an instruction-tuned LLM produces two English translations of the surrounding sentence, a small set of candidate dictionary-style definitions, and a few candidate English lemmas. These outputs drive a hybrid retrieval step that combines dense definition-synset similarity, sparse lemma matching, and Maximal Marginal Relevance re-ranking. We evaluate the pipeline across a 6x6 grid of LLMs and sentence-embedding models on a new bilingual set of manually annotated Latin and Ancient Greek perception verbs, on a subset of PREMOVE dataset (Farina, 2025), and on a diachronic sample of Italian. The best configuration reaches 96\% Recall@50 on the perception-verb test set, with each component contributing measurable gains, and remains competitive in the out-of-domain and cross-lingual settings.}
+}
+
+@inproceedings{ciletti2026foggia,
+  title={The {F}oggia Occupator Corpus: Digitisation, Annotation, and Computational Analysis of an Occupation-Era Newspaper (1945-1946)},
+  author={Ciletti, Michele},
+  editor={Piperidis, Stelios and Bel, N{\'u}ria and van den Heuvel, Henk and Ide, Nancy and Krek, Simon and Toral, Antonio},
+  booktitle={Proceedings of the Fifteenth Language Resources and Evaluation Conference (LREC 2026)},
+  month=may,
+  year={2026},
+  address={Palma de Mallorca, Spain},
+  publisher={ELRA Language Resource Association},
+  url={https://aclanthology.org/2026.lrec-1.536/},
+  doi={10.63317/2xbscmzsjers},
+  pages={6731--6739},
+  abstract={Historical newspapers are crucial sources yet often remain undigitised or lack machine-readable text. We present the Foggia Occupator corpus, a linguistically enriched, openly licensed resource built from twenty-two issues (Dec 1945 to Aug 1946) of a weekly newspaper produced by U.S. personnel in occupied Foggia, Italy. High-resolution scans were processed via OCR with LLM-assisted correction (GPT-4o) and full human verification, then segmented into 874 articles (~216k tokens). We annotate topics, named entities and typed relations via a semi-automatic pipeline with manual reconciliation, and perform argument mining on civics- and conflict-related content, yielding 1,735 arguments. The entity-relation layer supports network analyses that reveal sparse, modular structures linking military units, civic bodies, and social life. We release TEI-XML with entity spans, JSON article files with metadata, CSVs of entities/relations with temporal counts, and an arguments JSON, all under a Creative Commons 4.0 licence. Beyond documenting an in-between moment of reconstruction, the resource enables benchmarking for OCR-robust NER/RE and studies of framing, stance, and community structure in post-war local media.}
+}
+
 @inproceedings{farina2026sense,
   title={Sense-Based Annotation of Geographical Nouns in Ancient Greek and Latin: A Diachronic Study with LLMs},
   author={Farina, Andrea and Ciletti, Michele and McGillivray, Barbara and Ballatore, Andrea},
