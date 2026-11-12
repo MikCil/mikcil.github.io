@@ -1,0 +1,54 @@
+{{/* SEO: schema.org Person structured data for the homepage, built from the superuser's profile
+     in content/authors/. Helps Google link this site to your name, affiliations and profiles. */}}
+{{ if .IsHome }}
+  {{ with index (where (where site.Pages "Section" "authors") "Params.superuser" true) 0 }}
+    {{ $person := dict
+      "@context" "https://schema.org"
+      "@type" "Person"
+      "@id" (printf "%s#person" site.BaseURL)
+      "name" .Title
+      "url" site.BaseURL
+      "mainEntityOfPage" site.BaseURL
+    }}
+    {{ with .Params.first_name }}{{ $person = merge $person (dict "givenName" .) }}{{ end }}
+    {{ with .Params.last_name }}{{ $person = merge $person (dict "familyName" .) }}{{ end }}
+    {{ with .Params.role }}{{ $person = merge $person (dict "jobTitle" .) }}{{ end }}
+    {{ with site.Params.marketing.seo.description }}{{ $person = merge $person (dict "description" .) }}{{ end }}
+    {{ with .Params.interests }}{{ $person = merge $person (dict "knowsAbout" .) }}{{ end }}
+
+    {{ with .Resources.GetMatch "avatar*" }}
+      {{ $person = merge $person (dict "image" (.Fill "400x400 Center").Permalink) }}
+    {{ end }}
+
+    {{/* Current affiliations */}}
+    {{ $orgs := slice }}
+    {{ range .Params.organizations }}
+      {{ $org := dict "@type" "Organization" "name" .name }}
+      {{ with .url }}{{ $org = merge $org (dict "url" .) }}{{ end }}
+      {{ $orgs = $orgs | append $org }}
+    {{ end }}
+    {{ with $orgs }}{{ $person = merge $person (dict "affiliation" .) }}{{ end }}
+
+    {{/* Completed degrees (visiting stays are skipped) */}}
+    {{ $alumni := slice }}
+    {{ range .Params.education }}
+      {{ if and .date_end (not (strings.Contains .area "Visiting")) }}
+        {{ $alumni = $alumni | append .institution }}
+      {{ end }}
+    {{ end }}
+    {{ with uniq $alumni }}
+      {{ $list := slice }}
+      {{ range . }}{{ $list = $list | append (dict "@type" "CollegeOrUniversity" "name" .) }}{{ end }}
+      {{ $person = merge $person (dict "alumniOf" $list) }}
+    {{ end }}
+
+    {{/* Social/academic profiles (sameAs) */}}
+    {{ $same := slice }}
+    {{ range .Params.profiles }}
+      {{ if hasPrefix .url "http" }}{{ $same = $same | append .url }}{{ end }}
+    {{ end }}
+    {{ with $same }}{{ $person = merge $person (dict "sameAs" .) }}{{ end }}
+
+    <script type="application/ld+json">{{ $person | jsonify | safeJS }}</script>
+  {{ end }}
+{{ end }}

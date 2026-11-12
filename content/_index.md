@@ -1,6 +1,9 @@
 ---
 # Leave the homepage title empty to use the site title
 title: "Michele Ciletti"
+# Title shown in Google results / browser tab for the homepage
+seo:
+  title: "Michele Ciletti | PhD Student in NLP at Sapienza University of Rome"
 date: 2022-10-24
 type: landing
 

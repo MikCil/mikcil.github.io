@@ -47,7 +47,7 @@ profiles:
   - icon: brands/github
     url: https://github.com/mikcil
   - icon: brands/linkedin
-    url: www.linkedin.com/in/micheleciletti
+    url: https://www.linkedin.com/in/micheleciletti
   - icon: academicons/google-scholar
     url: https://scholar.google.com/citations?user=_K9udnoAAAAJ&hl=en
   - icon: academicons/researchgate
@@ -91,8 +91,8 @@ education:
 work:
   - position: PhD Student
     company_name: Sapienza University of Rome
-    company_url: 'https://www.unifg.it/en'
-    company_logo: custom/unifg
+    company_url: 'https://www.uniroma1.it/en'
+    company_logo: custom/sapienza
     date_start: 2026-11-01
     date_end: ''
     summary: |

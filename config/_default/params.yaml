@@ -14,8 +14,8 @@ marketing:
     site_type: Person
     local_business_type: ''
     org_name: ''
-    description: 'A personal academic website by Michele Ciletti, PhD Student in NLP and Computational Linguistics.'
-    twitter: 'mikcil'
+    description: 'Michele Ciletti is a PhD student at Sapienza NLP (Sapienza University of Rome) working on Word Sense Disambiguation, multilingual semantics, small language models and Latin & Ancient Greek.'
+    twitter: 'mik_cil'
   analytics:
     google_analytics: ''
     baidu_tongji: ''
@@ -23,7 +23,7 @@ marketing:
     fathom: ''
     pirsch: ''
   verification:
-    google: ''
+    google: 'AWM7K-zjGWrj5_CmeOIGmefQRTLNAgP83NNnSbuyA4U'
     baidu: ''
 
 # Site header

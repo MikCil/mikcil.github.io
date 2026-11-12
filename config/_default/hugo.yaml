@@ -4,7 +4,7 @@
 # This file is formatted using YAML syntax - learn more at https://learnxinyminutes.com/docs/yaml/
 
 # Website name
-title: Michele Ciletti - PhD Student - NLP & Computational Linguistics
+title: Michele Ciletti
 # Website URL
 baseURL: 'https://mikcil.github.io/'
 
@@ -55,3 +55,9 @@ security:
   _merge: deep
 sitemap:
   _merge: deep
+# SEO: keep thin tag / publication-type listing pages out of Google and the sitemap
+cascade:
+  - _target:
+      kind: '{taxonomy,term}'
+    params:
+      private: true
